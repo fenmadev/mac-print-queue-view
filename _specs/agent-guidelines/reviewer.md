@@ -12,6 +12,8 @@ The order is implementation → independent internal Claude review → fixes and
 
 Reviewers never print on paper, never change real print jobs, printers or system settings, never install, stage or commit. Reviewers may build the app and run read-only queries.
 
+Every build of the app target raises the build number kept in the tracked file `BUILD_NUMBER` in the project root (D47). A check build — by a reviewer or by the executor for a check — notes the value of `BUILD_NUMBER` before building and writes that value back afterwards, so that the check leaves the project unchanged; the report says that this was done. Build into a temporary folder outside the project (`-derivedDataPath`).
+
 ## Naming reports
 
 Store reports under `_docs/phases/phase-NN/` in this project with the file name `<NN>-<role>-<model>.md` (D26):

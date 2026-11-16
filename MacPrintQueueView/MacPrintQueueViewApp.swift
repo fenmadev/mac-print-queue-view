@@ -13,6 +13,9 @@ struct MacPrintQueueViewApp: App {
                 .frame(minWidth: 900, minHeight: 560)
         }
         .commands {
+            CommandGroup(replacing: .appInfo) {
+                Button(String(localized: "About \(Self.displayName)")) { AboutPanel.show() }
+            }
             CommandGroup(replacing: .newItem) {}
         }
 

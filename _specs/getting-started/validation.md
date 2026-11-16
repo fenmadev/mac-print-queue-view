@@ -5,7 +5,8 @@
 | Phase | Content | Status |
 | --- | --- | --- |
 | 00 | Record everything built before the review method was introduced: app, specs, decisions, evidence. | Closed |
-| 01 | Thumbnail sizes in the queue (RM-001), selecting several queued jobs with actions and a grid preview (RM-003), reordering in the grid (RM-004), visible column divider (RM-005), release install script (RM-006), deselecting a job that leaves the queue (RM-007), test printer script (RM-008). | In progress |
+| 01 | Thumbnail sizes in the queue (RM-001), selecting several queued jobs with actions and a grid preview (RM-003), reordering in the grid (RM-004), visible column divider (RM-005), release install script (RM-006), deselecting a job that leaves the queue (RM-007), test printer script (RM-008). | Closed |
+| 02 | New app icon in the style of Print Center (RM-009), About window with version, build and version date (RM-010), build number raised with every build (RM-011). | Closed |
 
 Later phases are defined by the user; requested functions are first recorded in the [roadmap](../../_docs/roadmap.md). Each phase has a plan, evidence, reviews and a closure in `_docs/phases/phase-NN/` in this project.
 
@@ -38,3 +39,5 @@ These cannot be done by the executor (no screen recording or accessibility acces
 15. Phase 01, column divider (QUEUE-001-AC10): the divider between the job list and the preview is clearly visible (line and grip) in light and dark mode and easy to grab and drag; the divider at the printer column is also wider; the line stays on the divider when the printer column is hidden or shown, in full screen and after moving the window between screens.
 16. Phase 01, test printer (RM-008): `Tools/test-printer.sh create`, `jobs`, then `printing` (one job shows as printing in the app, the others wait) and `complete` (that job moves to "Completed" as completed, the others still wait, the printer is stopped); finally `remove`. Nothing may come out of any printer.
 17. Phase 01, install script (RM-006): `Tools/install-release.sh` into `~/Applications`, also while the installed copy is running (it is quit first), and the installed app starts.
+18. Phase 02, app icon (APP-001 behaviour 2): after installing the new build, the icon in the Dock, Finder, Launchpad, the App Switcher (⌘⇥) and the About window is the printer with the magnifying glass, sharp at every size, in light and dark mode. If the old icon still shows, restart the Dock (`killall Dock`); the icon cache can lag behind.
+19. Phase 02, About window (APP-001-AC05): the app menu → "About Mac Print Queue View" shows icon, name, "Version 1.0 (Build n)" with the build number of the installed build (`BUILD_NUMBER` after that build), the description, "Version date: November 16, 2026" and the copyright; the same in Dutch and Turkish after choosing the language in Settings and restarting.

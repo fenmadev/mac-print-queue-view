@@ -1,6 +1,6 @@
 # Roadmap
 
-Date (UTC): 2026-11-16T22:12:36Z
+Date (UTC): 2026-11-16T23:21:44Z
 
 All functions the user has asked for, planned or delivered. A new request is added here first, with the next free `RM` number. When it is built, it gets a phase plan in `phases/phase-NN/`, and the row links to that plan and, once delivered, to the spec.
 
@@ -14,7 +14,7 @@ Status values: **requested** (recorded, not yet in a phase) → **planned** (ass
 
 ## Delivered
 
-Phase 00 is closed (internal approval report 15, external approval report 16). The specs keep status `draft` until the practical checks in the validation plan are done; the approval covers software and documentation, not practical acceptance. After closure the git repository was set up as part of phase 00 (D35–D37). Phase 01 (RM-001, RM-003–RM-008) is closed (internal approval report 11, external approval report 12); its practical checks 12–17 are open.
+Phase 00 is closed (internal approval report 15, external approval report 16). The specs keep status `draft` until the practical checks in the validation plan are done; the approval covers software and documentation, not practical acceptance. After closure the git repository was set up as part of phase 00 (D35–D37). Phase 01 (RM-001, RM-003–RM-008) is closed (internal approval report 11, external approval report 12); its practical checks 12–17 are open. Phase 02 (RM-009–RM-011) is closed (internal approval report 04, external approval report 05); its practical checks 18–19 are partly open.
 
 | ID | Function | Phase | Spec |
 | --- | --- | --- | --- |
@@ -30,5 +30,8 @@ Phase 00 is closed (internal approval report 15, external approval report 16). T
 | RM-006 | Install script for the Release version (`Tools/install-release.sh`) | [phase 01](phases/phase-01/plan.md) (closed) | [README](../README.md) (Building) |
 | RM-007 | A selected job that leaves the queue is deselected and its preview disappears (D44) | [phase 01](phases/phase-01/plan.md) (closed) | [QUEUE-001](../_specs/functional/QUEUE-001-queue-overview.md) (AC11) |
 | RM-008 | Test printer script that never prints on paper (`Tools/test-printer.sh`) | [phase 01](phases/phase-01/plan.md) (closed) | [README](../README.md) (Testing without wasting paper) |
+| RM-009 | New app icon in the style of Print Center: a printer on a graphite rounded square with a magnifying glass over the printed sheet, full-bleed (D45; replaces D13) | [phase 02](phases/phase-02/plan.md) (closed) | [APP-001](../_specs/functional/APP-001-app-identity-and-distribution.md) (behaviour 2) |
+| RM-010 | About window: icon, name, version and build, description, version date and copyright, in the app's language (D46) | [phase 02](phases/phase-02/plan.md) (closed) | [APP-001](../_specs/functional/APP-001-app-identity-and-distribution.md) (behaviour 3, AC05) |
+| RM-011 | Build number raised by one with every build (D47) | [phase 02](phases/phase-02/plan.md) (closed) | [APP-001](../_specs/functional/APP-001-app-identity-and-distribution.md) (rule 5) |
 
 "Delivered" means built and recorded in a phase; the practical checks listed in the [validation plan](../_specs/getting-started/validation.md) may still be open.

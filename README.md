@@ -115,6 +115,16 @@ is running; copies running from other folders are left alone, and when the list 
 programs cannot be read it stops without replacing anything. A copy started from Terminal through
 a symbolic link to the destination is not recognised; quit it first.
 
+Every build raises the build number by one (Debug, Release, an archive and the install script
+alike): the build phase "Increase Build Number" runs `Tools/increase-build-number.sh`, which keeps
+the last number in `BUILD_NUMBER` and writes the new one into the built app; the About window
+shows it as "(Build n)". The build setting `CURRENT_PROJECT_VERSION` stays 1 and is replaced in
+every built app, so Xcode's target settings do not show the real number. A failed build may still
+use up a number, and two builds at the same moment can get the same number. A build made only to
+check something (for a review, for example) should note `BUILD_NUMBER` before building and write
+that value back afterwards. The version and its date are the build settings `MARKETING_VERSION`
+and `MPQV_VERSION_DATE`.
+
 The project is signed automatically with the FENMA IT B.V. team (Team ID `8RQJ83KNF9`).
 To publish to the Mac App Store, use **Product → Archive** in Xcode and then
 **Distribute App → App Store Connect**.
@@ -125,7 +135,7 @@ Project layout:
 README.md, LICENSE.md        this documentation and the license
 MacPrintQueueView/           Swift source code, translations and the asset catalog (app icon)
 MacPrintQueueView.xcodeproj
-Tools/                       scripts for the app icon, syncing translations, installing a release build and the test printer
+Tools/                       scripts for the app icon, syncing translations, installing a release build, the test printer and the build number
 ```
 
 ## Testing without wasting paper

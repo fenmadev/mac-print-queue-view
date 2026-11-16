@@ -10,13 +10,13 @@ MacPrintQueueView ("Mac Print Queue View") is a native macOS app that shows what
 | [PREV-001](functional/PREV-001-print-preview.md) | Print preview of a job's content | draft, v5 | phase 00 and phase 01 evidence |
 | [JOB-001](functional/JOB-001-job-actions.md) | Cancel, pause, reorder, print again and remove jobs | draft, v3 | phase 00 and phase 01 evidence |
 | [I18N-001](functional/I18N-001-localization.md) | English, Dutch and Turkish with an in-app choice | draft, v1 | phase 00 evidence |
-| [APP-001](functional/APP-001-app-identity-and-distribution.md) | Name, icon, sandbox, signing and App Store readiness | draft, v1 | phase 00 evidence |
+| [APP-001](functional/APP-001-app-identity-and-distribution.md) | Name, icon, sandbox, signing and App Store readiness | draft, v2 | phase 00 and phase 02 evidence |
 
 All features are `draft`: phase 00 records behaviour that was built before this method was introduced. The user approves them after the phase 00 reviews.
 
 ## Product decisions
 
-Explicit user decisions, all made on 2026-11-16: D1–D37 during the work recorded as phase 00, D38 and later in phase 01. Other choices in the specs are implementation defaults; the main ones are listed below and in the "Observed, yet to be confirmed" section of each feature.
+Explicit user decisions, all made on 2026-11-16: D1–D37 during the work recorded as phase 00, D38–D44 in phase 01, D45 and later in phase 02. Other choices in the specs are implementation defaults; the main ones are listed below and in the "Observed, yet to be confirmed" section of each feature.
 
 | Decision | Agreement |
 | --- | --- |
@@ -32,7 +32,7 @@ Explicit user decisions, all made on 2026-11-16: D1–D37 during the work record
 | D10 | Declare in the app that it uses no non-exempt encryption (`ITSAppUsesNonExemptEncryption = NO`). |
 | D11 | The app name is shown as "Mac Print Queue View" (with spaces). |
 | D12 | The app is available in English, Dutch and Turkish and follows the system language by default; the user can also choose the language inside the app. |
-| D13 | The app icon: a stack of paper sheets with a magnifying glass (accepted as designed). |
+| D13 | The app icon: a stack of paper sheets with a magnifying glass (accepted as designed). Superseded by D45 (phase 02). |
 | D14 | The job list column gets a modern look; a thumbnail of the first page is shown **only** for jobs in the queue, not for completed jobs. |
 | D15 | The queue order can be changed by drag and drop; if the dragged job is already printing when it is dropped, nothing is moved. |
 | D16 | Completed jobs show "print again" and "remove" icons on hover or selection, plus trackpad swipe actions; printing again from a row icon or swipe asks for confirmation. |
@@ -64,6 +64,9 @@ Explicit user decisions, all made on 2026-11-16: D1–D37 during the work record
 | D42 | Seven thumbnail steps (user, 2026-11-16, phase 01; extends D38, which had five): steps 6 and 7 are added (240 × 312 and 280 × 364 points). Implementation choices that follow from it: the job column keeps at least the thumbnail width plus 200 points for title, status and time, and widens when the user zooms in; if the columns then no longer fit, the window becomes wider (never beyond the screen; it is not narrowed again when zooming out). |
 | D43 | Divider between the job list and the preview (RM-005; user, 2026-11-16, phase 01): thicker, so it is easy to grab when resizing the columns, and clearly visible. Implementation: the column dividers are 9 points wide instead of 1 (also the one at the printer column, as macOS applies one divider style per window), and the divider before the preview shows a line over the full height with a grip in the middle, in system colours for light and dark mode, drawn by a separate view on top of the divider that lets clicks through. (A first implementation replaced the class of AppKit's split view to draw the divider; that broke AppKit's toolbar observation and made the app crash when a row was clicked — reported by the user on 2026-11-16 and fixed before any review.) |
 | D44 | A job that leaves the queue while it is selected (RM-007; user, 2026-11-16, phase 01) — printed, canceled or aborted — is deselected right away, so its preview disappears. A completed job that the user selects in "Completed" keeps its preview. (Until now the selection and preview stayed when the selected job finished.) |
+| D45 | New app icon (RM-009; user, 2026-11-16, phase 02; replaces D13): in the style of the macOS Print Center icon. Of four proposals (kept in `_docs/phases/phase-02/icon-proposals/`) the user chose A: a dark printer with a green status light on a graphite rounded square with a light rim, a printed sheet coming out of it and a magnifying glass over that sheet. The magnifying glass keeps the icon distinct from Apple's own icon (App Review guideline 5.2.5). |
+| D46 | About window (RM-010; user, 2026-11-16, phase 02): laid out as in the user's app BlueClap — icon, name, "Version 1.0 (Build 1)" with the labels in the app's language, a one-line description, "Version date: …" as a long date in the app's language, and the copyright. The version date is a build setting (`MPQV_VERSION_DATE`) next to the version and build number. The version number (1.0) and the copyright text are unchanged for now; the build number follows D47. |
+| D47 | Build number (RM-011; user, 2026-11-16, phase 02): every build raises the build number by one — Debug, Release, an archive and `Tools/install-release.sh` alike ("also when deploying to production"). Implementation: the build phase "Increase Build Number" runs `Tools/increase-build-number.sh`, which raises the number kept in `BUILD_NUMBER` (repository root, tracked) and writes it into the built app's Info.plist as `CFBundleVersion` before signing; the About window shows it. `BUILD_NUMBER` therefore changes with every build. Starting value: build 2 was the first build with the counter (2026-11-16). |
 
 Note (2026-11-16T16:14:54Z): when the reports of phase 00 were restarted, the wording of D21, D25, D26 and D29 was edited to remove references to the removed reports; their content is unchanged apart from clauses about how those reports were treated (neutralized, renamed, kept their headers), which no longer apply.
 

@@ -23,9 +23,15 @@ SwiftUI views ──► QueueStore (@MainActor, @Observable) ──► CUPSClien
 | `JobRows.swift` | Row views for queued and completed jobs, thumbnail, status badge, section header, row action buttons. |
 | `PDFPreview.swift` | PDFKit wrapper and a controller for paging and zooming; a fitted single-page view for the grid blocks. |
 | `LanguageSettings.swift`, `SettingsView.swift` | Language choice stored as `AppleLanguages`, Settings window, relaunch. |
-| `MacPrintQueueViewApp.swift` | App entry point, main window, Settings scene, quit after the last window closes. |
+| `MacPrintQueueViewApp.swift` | App entry point, main window, Settings scene, the app menu's About item (opens `AboutPanel`), quit after the last window closes. |
+| `AboutPanel.swift` | The About window: options for the standard AppKit About panel (name, version and build with translated labels, description, version date as a long date in the app's language); pure `options(info:locale:)`. |
 | `Localizable.xcstrings` | String Catalog with English (source), Dutch and Turkish. |
-| `Assets.xcassets` | App icon. |
+| `Assets.xcassets` | App icon (full-bleed, drawn by `Tools/make-icon.swift`; macOS applies the icon shape). |
+
+## Version and build number
+
+- Version: build setting `MARKETING_VERSION`; version date: build setting `MPQV_VERSION_DATE` (`yyyy-MM-dd`), put in the Info.plist as `MPQVVersionDate` by `MacPrintQueueView-Info.plist` (beside the project, merged with the generated Info.plist).
+- Build number: the build phase "Increase Build Number" (after Resources, always run, the built Info.plist as input so it runs after the Info.plist is written, before signing) runs `Tools/increase-build-number.sh`, which raises the last number in `BUILD_NUMBER` (project root, tracked) and sets `CFBundleVersion` in the built app. `CURRENT_PROJECT_VERSION` stays 1 and is overwritten. Script sandboxing is off for the app target because the script writes `BUILD_NUMBER` (D47).
 
 ## CUPS operations used
 

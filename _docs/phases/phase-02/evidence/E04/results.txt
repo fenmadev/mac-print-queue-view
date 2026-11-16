@@ -1,0 +1,9 @@
+41                     CFBundleVersion=42 counter=42/ | Build number 42 
+' 41 ' (spaces)        CFBundleVersion=42 counter=42/ | Build number 42 
+08 (leading zero)      CFBundleVersion=9 counter=9/ | Build number 9 
+0                      CFBundleVersion=1 counter=1/ | Build number 1 
+empty                  CFBundleVersion=1 counter=/ | error: <tmp>/BUILD_NUMBER must hold the last build number (a whole number) 
+abc                    CFBundleVersion=1 counter=abc/ | error: <tmp>/BUILD_NUMBER must hold the last build number (a whole number) 
+'1 2'                  CFBundleVersion=1 counter=1 2/ | error: <tmp>/BUILD_NUMBER must hold the last build number (a whole number) 
+two lines 3/4          CFBundleVersion=1 counter=3/4/ | error: <tmp>/BUILD_NUMBER must hold the last build number (a whole number) 
+file missing           CFBundleVersion=1 counter= | error: <tmp>/BUILD_NUMBER must hold the last build number (a whole number) 

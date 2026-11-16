@@ -53,6 +53,22 @@
         }
       }
     },
+    "About %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Over %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ Hakkında"
+          }
+        }
+      }
+    },
     "Action Failed": {
       "localizations": {
         "nl": {
@@ -81,6 +97,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu yazıcıdaki tüm tamamlanmış işleriniz ve saklanan belgeleri, listede görünmeyen eski işler de dahil olmak üzere kalıcı olarak silinecek. Kuyruktaki işler korunur."
+          }
+        }
+      }
+    },
+    "Build %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Derleme %@"
           }
         }
       }
@@ -1211,6 +1243,22 @@
         }
       }
     },
+    "Shows what is actually being printed from the macOS print queue.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laat zien wat er werkelijk wordt afgedrukt uit de afdrukwachtrij van macOS."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS yazdırma kuyruğundan gerçekte neyin yazdırıldığını gösterir."
+          }
+        }
+      }
+    },
     "Smaller Thumbnails": {
       "localizations": {
         "nl": {
@@ -1609,6 +1657,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bilinmiyor"
+          }
+        }
+      }
+    },
+    "Version %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versie %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm %@"
+          }
+        }
+      }
+    },
+    "Version date: %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versiedatum: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm tarihi: %@"
           }
         }
       }
