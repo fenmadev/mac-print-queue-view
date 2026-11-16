@@ -1,0 +1,1394 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "": {
+      "shouldTranslate": false
+    },
+    "%@ (default printer)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ (standaardprinter)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ (varsayılan yazıcı)"
+          }
+        }
+      }
+    },
+    "Aborted": {
+      "comment": "Print job state",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afgebroken"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yarıda kesildi"
+          }
+        }
+      }
+    },
+    "Action Failed": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actie mislukt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşlem Başarısız Oldu"
+          }
+        }
+      }
+    },
+    "All your completed jobs for this printer and their retained documents will be permanently removed, including older jobs not shown in the list. Jobs in the queue are kept.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al je voltooide taken voor deze printer en de bewaarde documenten worden definitief verwijderd, ook oudere taken die niet in de lijst staan. Taken in de wachtrij blijven staan."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu yazıcıdaki tüm tamamlanmış işleriniz ve saklanan belgeleri, listede görünmeyen eski işler de dahil olmak üzere kalıcı olarak silinecek. Kuyruktaki işler korunur."
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vazgeç"
+          }
+        }
+      }
+    },
+    "Cancel Job": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleer taak"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşi İptal Et"
+          }
+        }
+      }
+    },
+    "Cancel the selected job right away (⌫)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleer de geselecteerde taak direct (⌫)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili işi hemen iptal et (⌫)"
+          }
+        }
+      }
+    },
+    "Canceled": {
+      "comment": "Print job state",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geannuleerd"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İptal edildi"
+          }
+        }
+      }
+    },
+    "Clear Completed Jobs?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voltooide taken opruimen?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamamlanan işler temizlensin mi?"
+          }
+        }
+      }
+    },
+    "Clear…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opruimen…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temizle…"
+          }
+        }
+      }
+    },
+    "Completed": {
+      "comment": "Print job state",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voltooid"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamamlandı"
+          }
+        }
+      }
+    },
+    "Could not connect to the macOS printing service (CUPS).": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kan geen verbinding maken met de macOS-afdrukservice (CUPS)."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS yazdırma hizmetine (CUPS) bağlanılamadı."
+          }
+        }
+      }
+    },
+    "Could not create a temporary file.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kan geen tijdelijk bestand maken."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geçici dosya oluşturulamadı."
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verwijder"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sil"
+          }
+        }
+      }
+    },
+    "Document %lld of %lld: %@": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Document %lld van %lld: %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belge %lld / %lld: %@"
+          }
+        }
+      }
+    },
+    "Document format “%@” cannot be displayed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Documentformaat “%@” kan niet worden weergegeven."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” belge biçimi görüntülenemiyor."
+          }
+        }
+      }
+    },
+    "Fetching document from the queue…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Document ophalen uit de wachtrij…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belge kuyruktan alınıyor…"
+          }
+        }
+      }
+    },
+    "In Queue": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In wachtrij"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuyrukta"
+          }
+        }
+      }
+    },
+    "Job %d": {
+      "comment": "Title for a print job without a name",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taak %d"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İş %d"
+          }
+        }
+      }
+    },
+    "Jobs no longer completed, and therefore not removed: %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taken die niet meer voltooid waren en daarom niet zijn verwijderd: %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Artık tamamlanmış olmadığı için kaldırılmayan işler: %lld"
+          }
+        }
+      }
+    },
+    "Language": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dil"
+          }
+        }
+      }
+    },
+    "Move the job one place down in the queue (⌥⌘↓)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verplaats de taak één plaats naar achteren in de wachtrij (⌥⌘↓)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşi kuyrukta bir sıra aşağı taşı (⌥⌘↓)"
+          }
+        }
+      }
+    },
+    "Move the job one place up in the queue (⌥⌘↑)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verplaats de taak één plaats naar voren in de wachtrij (⌥⌘↑)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşi kuyrukta bir sıra yukarı taşı (⌥⌘↑)"
+          }
+        }
+      }
+    },
+    "Next Page": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volgende pagina"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonraki Sayfa"
+          }
+        }
+      }
+    },
+    "No Job Selected": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen taak geselecteerd"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili İş Yok"
+          }
+        }
+      }
+    },
+    "No Printers": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen printers"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yazıcı Yok"
+          }
+        }
+      }
+    },
+    "No access to this job. Only the owner of the job or an administrator can view its content.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen toegang tot deze taak. Alleen de eigenaar van de taak of een beheerder kan de inhoud bekijken."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu işe erişim yok. İçeriği yalnızca işin sahibi veya bir yönetici görüntüleyebilir."
+          }
+        }
+      }
+    },
+    "No connection to the printing service": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen verbinding met de afdrukservice"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yazdırma hizmetiyle bağlantı yok"
+          }
+        }
+      }
+    },
+    "No jobs in the queue": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen taken in de wachtrij"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuyrukta iş yok"
+          }
+        }
+      }
+    },
+    "No printers are set up on this Mac.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er zijn op deze Mac geen printers ingesteld."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu Mac’te ayarlanmış yazıcı yok."
+          }
+        }
+      }
+    },
+    "None of the documents in this job can be displayed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geen van de documenten in deze taak kan worden weergegeven."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu işteki belgelerin hiçbiri görüntülenemiyor."
+          }
+        }
+      }
+    },
+    "Not Removed": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niet verwijderd"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaldırılmadı"
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamam"
+          }
+        }
+      }
+    },
+    "Only %lld of the %lld images in this document can be displayed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slechts %1$lld van de %2$lld afbeeldingen in dit document kunnen worden weergegeven."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu belgedeki %2$lld görüntüden yalnızca %1$lld tanesi görüntülenebilir."
+          }
+        }
+      }
+    },
+    "Page %lld of %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pagina %lld van %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sayfa %lld / %lld"
+          }
+        }
+      }
+    },
+    "Part of this job cannot be displayed:": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Een deel van deze taak kan niet worden weergegeven:"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu işin bir kısmı görüntülenemiyor:"
+          }
+        }
+      }
+    },
+    "Pause": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pauzeer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duraklat"
+          }
+        }
+      }
+    },
+    "Pause the job; the other jobs keep printing": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pauzeer de taak; de andere taken worden gewoon afgedrukt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşi duraklat; diğer işler yazdırılmaya devam eder"
+          }
+        }
+      }
+    },
+    "Paused": {
+      "comment": "Print job state (held)",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gepauzeerd"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duraklatıldı"
+          }
+        }
+      }
+    },
+    "Pending": {
+      "comment": "Print job state",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wacht"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekliyor"
+          }
+        }
+      }
+    },
+    "Previous Page": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vorige pagina"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Önceki Sayfa"
+          }
+        }
+      }
+    },
+    "Print": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Druk af"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yazdır"
+          }
+        }
+      }
+    },
+    "Print Again": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opnieuw afdrukken"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeniden Yazdır"
+          }
+        }
+      }
+    },
+    "Print Earlier": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eerder afdrukken"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha Önce Yazdır"
+          }
+        }
+      }
+    },
+    "Print Later": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Later afdrukken"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha Sonra Yazdır"
+          }
+        }
+      }
+    },
+    "Print Preview Not Available": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afdrukvoorbeeld niet beschikbaar"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baskı Önizlemesi Kullanılamıyor"
+          }
+        }
+      }
+    },
+    "Print “%@” Again?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” opnieuw afdrukken?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” yeniden yazdırılsın mı?"
+          }
+        }
+      }
+    },
+    "Printers": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Printers"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yazıcılar"
+          }
+        }
+      }
+    },
+    "Printing": {
+      "comment": "Print job state",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wordt afgedrukt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yazdırılıyor"
+          }
+        }
+      }
+    },
+    "Put the selected completed job back in the queue": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zet de geselecteerde voltooide taak opnieuw in de wachtrij"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili tamamlanmış işi yeniden kuyruğa al"
+          }
+        }
+      }
+    },
+    "Remove Completed Job?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voltooide taak verwijderen?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tamamlanan iş kaldırılsın mı?"
+          }
+        }
+      }
+    },
+    "Remove all your completed jobs for this printer": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verwijder al je voltooide taken voor deze printer"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu yazıcıdaki tüm tamamlanmış işlerinizi kaldır"
+          }
+        }
+      }
+    },
+    "Remove from List…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verwijder uit lijst…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listeden Kaldır…"
+          }
+        }
+      }
+    },
+    "Remove the selected job from the list (⌫)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verwijder de geselecteerde taak uit de lijst (⌫)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili işi listeden kaldır (⌫)"
+          }
+        }
+      }
+    },
+    "Restart Now": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nu herstarten"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şimdi Yeniden Başlat"
+          }
+        }
+      }
+    },
+    "Resume": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hervat"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürdür"
+          }
+        }
+      }
+    },
+    "Resume the job": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hervat de taak"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşi sürdür"
+          }
+        }
+      }
+    },
+    "Select a print job to see what is being printed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selecteer een afdruktaak om te zien wat er wordt afgedrukt."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neyin yazdırıldığını görmek için bir yazdırma işi seçin."
+          }
+        }
+      }
+    },
+    "Stopped": {
+      "comment": "Print job state",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gestopt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durduruldu"
+          }
+        }
+      }
+    },
+    "System Language": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Systeemtaal"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem Dili"
+          }
+        }
+      }
+    },
+    "System Language follows the language set in System Settings.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Systeemtaal volgt de taal die in Systeeminstellingen is ingesteld."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem Dili, Sistem Ayarları’nda belirlenen dili kullanır."
+          }
+        }
+      }
+    },
+    "The PDF document in the queue could not be read.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het PDF-document in de wachtrij kan niet worden gelezen."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuyruktaki PDF belgesi okunamadı."
+          }
+        }
+      }
+    },
+    "The PDF document is password protected.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het PDF-document is beveiligd met een wachtwoord."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PDF belgesi parola korumalı."
+          }
+        }
+      }
+    },
+    "The app uses the new language after restarting.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De app gebruikt de nieuwe taal na een herstart."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uygulama yeni dili yeniden başlatıldıktan sonra kullanır."
+          }
+        }
+      }
+    },
+    "The document cannot be displayed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het document kan niet worden weergegeven."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belge görüntülenemiyor."
+          }
+        }
+      }
+    },
+    "The document contains no pages to show.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het document bevat geen pagina’s om te tonen."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belgede gösterilecek sayfa yok."
+          }
+        }
+      }
+    },
+    "The document is empty.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het document is leeg."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belge boş."
+          }
+        }
+      }
+    },
+    "The document is no longer available in the queue.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het document is niet meer beschikbaar in de wachtrij."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belge artık kuyrukta mevcut değil."
+          }
+        }
+      }
+    },
+    "The job could not be deleted.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De taak kan niet worden verwijderd."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İş silinemedi."
+          }
+        }
+      }
+    },
+    "The job could not be paused.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De taak kan niet worden gepauzeerd."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İş duraklatılamadı."
+          }
+        }
+      }
+    },
+    "The job could not be put back in the queue. The document may already have been removed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De taak kan niet opnieuw in de wachtrij worden gezet. Mogelijk is het document al opgeruimd."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İş yeniden kuyruğa alınamadı. Belge zaten kaldırılmış olabilir."
+          }
+        }
+      }
+    },
+    "The job could not be removed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De taak kan niet worden opgeruimd."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İş kaldırılamadı."
+          }
+        }
+      }
+    },
+    "The job could not be resumed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De taak kan niet worden hervat."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İş sürdürülemedi."
+          }
+        }
+      }
+    },
+    "The job will be put back in the queue and printed again.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De taak wordt opnieuw in de wachtrij gezet en nog een keer afgedrukt."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İş yeniden kuyruğa alınacak ve tekrar yazdırılacak."
+          }
+        }
+      }
+    },
+    "The printing service returned an error.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De afdrukservice gaf een fout."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yazdırma hizmeti bir hata döndürdü."
+          }
+        }
+      }
+    },
+    "The queue order could not be changed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De volgorde van de wachtrij kan niet worden aangepast."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuyruk sırası değiştirilemedi."
+          }
+        }
+      }
+    },
+    "This document is PostScript; macOS can no longer render that format itself.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit document is PostScript; dat formaat kan macOS niet meer zelf weergeven."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu belge PostScript biçiminde; macOS bu biçimi artık kendisi görüntüleyemiyor."
+          }
+        }
+      }
+    },
+    "This job belongs to another user. macOS only gives the owner of a job access to its content.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze taak is van een andere gebruiker. macOS geeft alleen de eigenaar van een taak toegang tot de inhoud."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu iş başka bir kullanıcıya ait. macOS bir işin içeriğine yalnızca sahibinin erişmesine izin verir."
+          }
+        }
+      }
+    },
+    "This job does not contain a document (yet).": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze taak bevat (nog) geen document."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu iş (henüz) bir belge içermiyor."
+          }
+        }
+      }
+    },
+    "This job has already started printing and can no longer be paused. You can cancel it instead.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deze taak wordt al afgedrukt en kan niet meer worden gepauzeerd. Je kunt hem wel annuleren."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu iş zaten yazdırılmaya başladı ve artık duraklatılamaz. Bunun yerine iptal edebilirsiniz."
+          }
+        }
+      }
+    },
+    "Unknown": {
+      "comment": "Print job state",
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onbekend"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilinmiyor"
+          }
+        }
+      }
+    },
+    "Zoom In": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inzoomen"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yakınlaştır"
+          }
+        }
+      }
+    },
+    "Zoom Out": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uitzoomen"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uzaklaştır"
+          }
+        }
+      }
+    },
+    "Zoom to Fit": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passend maken"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sığdır"
+          }
+        }
+      }
+    },
+    "“%@” and its retained document will be permanently removed. You will no longer be able to view or reprint it.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” en het bewaarde document worden definitief verwijderd. Bekijken of opnieuw afdrukken kan daarna niet meer."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” ve saklanan belgesi kalıcı olarak silinecek. Artık görüntüleyemez veya yeniden yazdıramazsınız."
+          }
+        }
+      }
+    },
+    "“%@” is no longer completed and was not removed.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” is niet meer voltooid en is niet verwijderd."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” artık tamamlanmış değil ve kaldırılmadı."
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

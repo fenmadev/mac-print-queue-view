@@ -1,0 +1,21 @@
+K1 valid two.tiff: pages=2 problems=[]
+K1 bad-compression.tiff: pages=1 problems=["Only 1 of the 2 images in this document can be displayed."]
+K1 bad-compression.tiff labelled octet-stream: pages=1 problems=["Only 1 of the 2 images in this document can be displayed."]
+Codex bad-second.tiff: pages=2 problems=[]
+text + bad-compression.tiff: pages=2 problems=["Document 2 of 2: Only 1 of the 2 images in this document can be displayed."]
+text + undecodable image (E22): pages=1 problems=["Document 2 of 2: Document format “image/png” cannot be displayed."]
+two.tiff + third IFD beyond EOF: ERROR Document format “image/tiff” cannot be displayed.
+two.tiff with IFD loop: ERROR Document format “image/tiff” cannot be displayed.
+single TIFF: pages=1 problems=[]
+three-frame GIF: pages=3 problems=[]
+PNG: pages=1 problems=[]
+JPEG: pages=1 problems=[]
+text only: pages=1 problems=[]
+count LE [nil,nil,nil] = Optional(3)
+count BE [nil,nil] = Optional(2)
+count LE [0, 1 (thumbnail), 4 (mask), 2 (page)] = Optional(2)
+count BigTIFF x3 = Optional(3)
+count two.tiff = Optional(2)  bad-compression = Optional(2)  beyond = Optional(3)  loop = Optional(2)
+count PNG = nil  short = nil
+count LE unsorted [page, thumbnail after tag 256] = Optional(1)
+count BigTIFF BE [page, thumbnail as LONG8] = Optional(1)

@@ -1,0 +1,2 @@
+BigTIFF 1M entries size 20000032 count Optional(1) 0.002 s
+classic 10,000 x 255 size 30660008 count Optional(10000) 0.005 s
