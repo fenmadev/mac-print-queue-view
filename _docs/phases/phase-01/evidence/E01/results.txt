@@ -1,0 +1,78 @@
+step 0 -> 40x52, in true, out false
+step 1 -> 40x52, in true, out false
+step 2 -> 80x104, in true, out true
+step 3 -> 120x156, in true, out true
+step 4 -> 160x208, in true, out true
+step 5 -> 200x260, in true, out true
+step 6 -> 240x312, in true, out true
+step 7 -> 280x364, in false, out true
+step 8 -> 280x364, in false, out true
+PASS step 1: (40.0, 52.0)
+PASS step 5 = 5 x step 1: (200.0, 260.0)
+PASS step 6 = 6 x step 1: (240.0, 312.0)
+PASS step 7 = 7 x step 1: (280.0, 364.0)
+PASS steps: 1...7
+PASS default step: 1
+PASS render pixel size: 728.0
+PASS no zoom out at 1, no zoom in at 7: false false
+PASS zoom in at 5 and 6: true true
+PASS grid 2: 2x1
+PASS grid 3: 2x2
+PASS grid 4: 2x2
+PASS grid 5: 3x3
+PASS grid 9: 3x3
+PASS grid 10: 4x4
+PASS grid 11: 4x4
+PASS grid 16: 4x4
+PASS grid 17: 4x4
+PASS grid 40: 4x4
+PASS maximum shown: 16
+PASS D39 example: A B C D E, B D up: BDACE
+PASS again up (already at top): nil
+PASS B D down (mirror, gathered at D): ACEBD
+PASS contiguous C D up: ACDBE
+PASS contiguous C D down: ABECD
+PASS single B up = swap: BACDE
+PASS single B down = swap: ACBDE
+PASS single A up (top): nil
+PASS single E down (bottom): nil
+PASS A C at top up: gathered only: ACBDE
+PASS C E at bottom down: gathered only: ABDCE
+PASS all selected: nil
+PASS none selected: nil
+PASS unknown IDs ignored: BACDE
+PASS offset 2 refused: nil
+PASS A E up: AEBCD
+PASS A E down: BCDAE
+PASS grid B D E, drag E onto B: EBD
+PASS queue A B C D E as E B D: AECBD
+PASS grid B D E, drag B onto E: DEB
+PASS queue A B C D E as D E B: ADCEB
+PASS grid drag D onto E: BED
+PASS drag onto itself: nil
+PASS unknown target: nil
+PASS unchanged arrangement: nil
+PASS arranged job not in order ignored: AECDB
+PASS cmd-click queue jobs: 1,3
+PASS single completed: 8
+PASS cmd-click completed onto queue selection: 8
+PASS cmd-click queue job onto completed: 2
+PASS select all: 1,2,3
+PASS shift range in completed, downwards: the clicked (lowest) job: 7
+PASS shift range in completed, upwards: the clicked (highest) job: 9
+PASS range only completed, from nothing: the top job: 8
+PASS deselect to empty: 
+PASS selected queue job printed (now completed): 
+PASS selected queue job canceled, not yet listed: 
+PASS selected queue job still queued: 2
+PASS selected completed job stays: 8
+PASS selected completed job removed: 
+PASS completed job printed again (back in the queue): 8
+PASS several: one printed: 1,3
+PASS several: all canceled: 
+PASS B starts printing while A is paused: B never held: paused 2, started 1, failure false; check A, hold A, check B, check C, hold C
+PASS pausing A fails, B started meanwhile: B never held, C still paused: paused 1, started 1, failure true; check A, hold A, check B, check C, hold C
+PASS state of B cannot be read: B not held, C still paused: paused 2, started 0, failure true; check A, hold A, check B, check C, hold C
+PASS negative control, one snapshot for all jobs: B is held while printing: check A, check B, check C, hold A, hold B, hold C
+PASS printing, gone or paused jobs are not held: paused 1, started 1, failure false; check A, check B, check C, hold C
+ALL PASS

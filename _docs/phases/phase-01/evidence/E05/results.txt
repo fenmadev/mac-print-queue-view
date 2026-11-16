@@ -1,0 +1,19 @@
+PASS split view: vertical true, columns 3, style thick, divider 9.0 points
+PASS after resize: divider 9.0 points, column widths [220, 520, 771]
+PASS window 1100, step 1: sidebar, visible job column, preview [220, 300, 571] (job column minimum 240); split view 1100, window content 1100
+PASS window 1100, step 2: sidebar, visible job column, preview [220, 300, 571] (job column minimum 280); split view 1100, window content 1100
+PASS window 1100, step 3: sidebar, visible job column, preview [220, 320, 551] (job column minimum 320); split view 1100, window content 1100
+PASS window 1100, step 4: sidebar, visible job column, preview [220, 360, 511] (job column minimum 360); split view 1100, window content 1100
+PASS window 1100, step 5: sidebar, visible job column, preview [220, 400, 471] (job column minimum 400); split view 1100, window content 1100
+PASS window 1100, step 6: sidebar, visible job column, preview [220, 440, 431] (job column minimum 440); split view 1100, window content 1100
+PASS window 1100, step 7: sidebar, visible job column, preview [220, 480, 391] (job column minimum 480); split view 1100, window content 1100
+PASS window 1100, step 1: sidebar, visible job column, preview [220, 300, 571] (job column minimum 240); split view 1100, window content 1100
+PASS window 900, step 1: sidebar, visible job column, preview [220, 300, 371] (job column minimum 240); split view 900, window content 900
+PASS window 900, step 2: sidebar, visible job column, preview [220, 300, 371] (job column minimum 280); split view 900, window content 900
+PASS window 900, step 3: sidebar, visible job column, preview [211, 320, 360] (job column minimum 320); split view 900, window content 900
+PASS window 909, step 4: sidebar, visible job column, preview [180, 360, 360] (job column minimum 360); split view 909, window content 909
+PASS window 949, step 5: sidebar, visible job column, preview [180, 400, 360] (job column minimum 400); split view 949, window content 949
+PASS window 989, step 6: sidebar, visible job column, preview [180, 440, 360] (job column minimum 440); split view 989, window content 989
+PASS window 1029, step 7: sidebar, visible job column, preview [180, 480, 360] (job column minimum 480); split view 1029, window content 1029
+PASS window 1029, step 1: sidebar, visible job column, preview [220, 300, 500] (job column minimum 240); split view 1029, window content 1029
+ALL PASS

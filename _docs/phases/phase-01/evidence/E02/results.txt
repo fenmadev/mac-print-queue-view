@@ -1,0 +1,9 @@
+PASS thumbnail portrait A4 longest side in pixels: 728
+  portrait A4: 514x728 pixels, 12075 bytes
+PASS thumbnail landscape A4 longest side in pixels: 728
+  landscape A4: 728x514 pixels, 11840 bytes
+PASS 5-page job: pages, block pages: 5 1
+PASS 5-page job: block page size: 595x842
+PASS text + PDF job: pages > 2, block pages 1: true 1
+PASS PDF + unreadable image: block marked partial: 1 1
+ALL PASS

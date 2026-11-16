@@ -3,7 +3,7 @@ id: PREV-001
 title: Print preview of a job's content
 type: feature
 status: draft
-version: 4
+version: 5
 ---
 
 # PREV-001 — Print preview of a job's content
@@ -19,6 +19,7 @@ Show what is actually being printed: when the user selects a print job, the app 
 3. Multi-page documents can be paged through (toolbar, ⌘↑/⌘↓ or scrolling) and zoomed (⌘= zoom in, ⌘- zoom out, ⌘0 zoom to fit, or pinch). The toolbar shows "Page x of y".
 4. The window title shows the job title; the subtitle shows the job number, state and printer.
 5. If no preview is possible, the preview column says "Print Preview Not Available" with the reason.
+6. When several jobs in the queue are selected (D39), the preview column shows them side by side in a grid of equal blocks, in print order: 2 jobs side by side, 3–4 jobs in 2 × 2, 5–9 jobs in 3 × 3, 10–16 jobs in 4 × 4. Each block shows the job title, its page count ("Pages: n"), its status label and only the first page; the bottom right of each block shows its order number, counting left to right and then the next row (D41). With more than 16 selected jobs, the first 16 are shown with the note "Showing the first 16 of n selected jobs."; actions still apply to all selected jobs. The window subtitle says "n jobs selected". A block can be dragged onto another block to change the order ([JOB-001](JOB-001-job-actions.md), D40).
 
 ## Functional rules
 
@@ -29,10 +30,11 @@ Show what is actually being printed: when the user selects a print job, the app 
 5. PostScript and printer-specific data (for example CUPS raster) are not rendered; the app says so.
 6. No copy of the document is left on disk: the temporary file used for the transfer is unlinked immediately.
 7. Page and zoom controls stay in place (disabled) while a new document loads, so the toolbar does not jump when switching jobs.
+8. Grid of several jobs (D39, D41): the blocks are filled row by row, so the order numbers 1, 2, 3, … are the print order of the selected jobs; cells beyond the number of jobs stay empty. Each block is fetched and rendered like a single preview (rule 1–5); a job of which part cannot be displayed has an orange warning symbol with the warning as its tooltip, and a job that cannot be displayed shows the reason in its block. The page and zoom controls are not shown with a grid; the blocks cannot be scrolled or zoomed. To see a whole job, select it alone.
 
 ## User interface
 
-PDFKit view, continuous single pages, auto-scaling by default. Exact layout may change.
+PDFKit view, continuous single pages, auto-scaling by default. Grid blocks: a rounded panel with the title, page count and status label above the page, and the order number in an accent-coloured badge at the bottom right; a block that another block is dragged over gets an accent-coloured outline. Exact layout may change.
 
 ## Permissions
 
@@ -90,9 +92,22 @@ All failures are shown in the preview column with a translated explanation follo
 - **When** the user selects it.
 - **Then** the readable pages are shown with a warning that names each missing document and the reason; if no document can be rendered, the preview column states that none can be displayed, with the reasons.
 
+### PREV-001-AC07
+
+- **Given** the user selects 2, 3–4, 5–9, 10–16 or more than 16 jobs in the queue.
+- **When** the preview column is shown.
+- **Then** it shows a grid of 2 × 1, 2 × 2, 3 × 3 or 4 × 4 blocks respectively (4 × 4 with a note on how many are not shown when more than 16), in print order, each block with the job title, page count and only the first page; the page and zoom controls are not shown.
+
+### PREV-001-AC08
+
+- **Given** a grid of several selected jobs.
+- **When** it is shown, and after its order changes.
+- **Then** every block shows its order number at the bottom right, 1 for the top left block, counting left to right and then the next row.
+
 ## Observed, yet to be confirmed
 
 - Plain text is laid out on A4 in a 10 pt monospaced font (implementation choice).
+- A grid block cannot be clicked to open the job alone (implementation default, phase 01).
 
 ## Related specifications
 
@@ -112,12 +127,15 @@ IPP `CUPS-Get-Document` and `Get-Job-Attributes` (`number-of-documents`) over `/
 | PREV-001-AC04 | E03 (non-existent job), E05 (PostScript, CUPS raster), E22 (empty document, undecodable image, none readable), E27 (TIFF rejected as a whole) | Partial: messages in the window not visually checked |
 | PREV-001-AC05 | E04 (sandboxed harness), E01 | Partial: on-disk absence checked by code review only |
 | PREV-001-AC06 | E22 (text + undecodable image, text + empty + text, none readable), E27 (TIFF with an unreadable second image, alone and after a text document) | Partial: rendering logic checked with synthetic documents; the warning banner in the real window not visually checked; image data that macOS decodes without an error is not detectable (D34) |
+| PREV-001-AC07 | Phase 01 E01 (grid layout for every count), E02 (first-page document and page count, partial job marked), E04 (blocks of two held test jobs fetched from cupsd) | Partial: the grid in the real window not visually checked (`ImageRenderer` cannot draw the PDFKit view) |
+| PREV-001-AC08 | — | None: order number badge reviewed in code only; visual check pending |
 
 ### Last run
 
 | Date | Procedure | Outcome | By |
 | --- | --- | --- | --- |
 | 2026-11-16 | Ad hoc Swift harnesses (see evidence) | See evidence items | Executor (Claude), phase 00 |
+| 2026-11-16 | Phase 01 harnesses E01, E02, E04 | All checks passed | Executor (Claude), phase 01 |
 
 ## History
 
@@ -127,3 +145,4 @@ IPP `CUPS-Get-Document` and `Get-Job-Attributes` (`number-of-documents`) over `/
 | 2 | 2026-11-16 | Review finding: partial previews show a warning (D22); empty documents get their own message; AC06 added |
 | 3 | 2026-11-16 | Review finding: a `text/*` document starting with `%!` is shown as text; empty state described |
 | 4 | 2026-11-16 | External review finding K1: missing or unreadable images within one image document produce a warning; the completeness limit is recorded (D34) |
+| 5 | 2026-11-16 | Phase 01: grid preview of several selected jobs (D39, AC07) with order numbers (D41, AC08) |

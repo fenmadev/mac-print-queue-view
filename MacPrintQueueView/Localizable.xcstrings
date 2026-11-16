@@ -20,6 +20,22 @@
         }
       }
     },
+    "%lld jobs selected": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld taken geselecteerd"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld iş seçildi"
+          }
+        }
+      }
+    },
     "Aborted": {
       "comment": "Print job state",
       "localizations": {
@@ -85,6 +101,22 @@
         }
       }
     },
+    "Cancel %lld Jobs?": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld taken annuleren?"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld iş iptal edilsin mi?"
+          }
+        }
+      }
+    },
     "Cancel Job": {
       "localizations": {
         "nl": {
@@ -101,6 +133,38 @@
         }
       }
     },
+    "Cancel Jobs": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleer taken"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşleri İptal Et"
+          }
+        }
+      }
+    },
+    "Cancel Jobs…": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleer taken…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İşleri İptal Et…"
+          }
+        }
+      }
+    },
     "Cancel the selected job right away (⌫)": {
       "localizations": {
         "nl": {
@@ -113,6 +177,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seçili işi hemen iptal et (⌫)"
+          }
+        }
+      }
+    },
+    "Cancel the selected jobs, after confirmation (⌫)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleer de geselecteerde taken, na bevestiging (⌫)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili işleri onaydan sonra iptal et (⌫)"
           }
         }
       }
@@ -263,6 +343,22 @@
         }
       }
     },
+    "Don’t Cancel": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niet annuleren"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İptal Etme"
+          }
+        }
+      }
+    },
     "Fetching document from the queue…": {
       "localizations": {
         "nl": {
@@ -328,6 +424,22 @@
         }
       }
     },
+    "Jobs that had already started printing and were not paused: %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taken die al werden afgedrukt en daarom niet zijn gepauzeerd: %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yazdırılmaya başlandığı için duraklatılmayan işler: %lld"
+          }
+        }
+      }
+    },
     "Language": {
       "localizations": {
         "nl": {
@@ -340,6 +452,54 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dil"
+          }
+        }
+      }
+    },
+    "Larger Thumbnails": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grotere miniaturen"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha Büyük Küçük Resimler"
+          }
+        }
+      }
+    },
+    "Make the page thumbnails in the queue larger (⌥⌘=)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maak de paginaminiaturen in de wachtrij groter (⌥⌘=)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuyruktaki sayfa küçük resimlerini büyüt (⌥⌘=)"
+          }
+        }
+      }
+    },
+    "Make the page thumbnails in the queue smaller (⌥⌘-)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maak de paginaminiaturen in de wachtrij kleiner (⌥⌘-)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuyruktaki sayfa küçük resimlerini küçült (⌥⌘-)"
           }
         }
       }
@@ -372,6 +532,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "İşi kuyrukta bir sıra yukarı taşı (⌥⌘↑)"
+          }
+        }
+      }
+    },
+    "Move the selected jobs one place down in the queue, as one block (⌥⌘↓)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verplaats de geselecteerde taken als één blok één plaats naar achteren in de wachtrij (⌥⌘↓)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili işleri tek blok olarak kuyrukta bir sıra aşağı taşı (⌥⌘↓)"
+          }
+        }
+      }
+    },
+    "Move the selected jobs one place up in the queue, as one block (⌥⌘↑)": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verplaats de geselecteerde taken als één blok één plaats naar voren in de wachtrij (⌥⌘↑)"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili işleri tek blok olarak kuyrukta bir sıra yukarı taşı (⌥⌘↑)"
           }
         }
       }
@@ -568,6 +760,22 @@
         }
       }
     },
+    "Pages: %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pagina’s: %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sayfa: %lld"
+          }
+        }
+      }
+    },
     "Part of this job cannot be displayed:": {
       "localizations": {
         "nl": {
@@ -616,6 +824,22 @@
         }
       }
     },
+    "Pause the selected jobs that are waiting; the other jobs keep printing": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pauzeer de geselecteerde wachtende taken; de andere taken worden gewoon afgedrukt"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili bekleyen işleri duraklat; diğer işler yazdırılmaya devam eder"
+          }
+        }
+      }
+    },
     "Paused": {
       "comment": "Print job state (held)",
       "localizations": {
@@ -646,6 +870,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bekliyor"
+          }
+        }
+      }
+    },
+    "Position %lld": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Positie %lld"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sıra %lld"
           }
         }
       }
@@ -923,6 +1163,22 @@
         }
       }
     },
+    "Resume the selected paused jobs": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hervat de geselecteerde gepauzeerde taken"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili duraklatılmış işleri sürdür"
+          }
+        }
+      }
+    },
     "Select a print job to see what is being printed.": {
       "localizations": {
         "nl": {
@@ -935,6 +1191,38 @@
           "stringUnit": {
             "state": "translated",
             "value": "Neyin yazdırıldığını görmek için bir yazdırma işi seçin."
+          }
+        }
+      }
+    },
+    "Showing the first %lld of %lld selected jobs.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De eerste %lld van %lld geselecteerde taken worden getoond."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili %2$lld işin ilk %1$lld tanesi gösteriliyor."
+          }
+        }
+      }
+    },
+    "Smaller Thumbnails": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kleinere miniaturen"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha Küçük Küçük Resimler"
           }
         }
       }
@@ -1224,6 +1512,22 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kuyruk sırası değiştirilemedi."
+          }
+        }
+      }
+    },
+    "The selected jobs will be canceled right away. They move to “Completed”, where you can print them again.": {
+      "localizations": {
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De geselecteerde taken worden direct geannuleerd. Ze komen bij “Voltooid”, waar je ze opnieuw kunt afdrukken."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seçili işler hemen iptal edilecek. “Tamamlandı” bölümüne taşınacaklar; oradan yeniden yazdırabilirsiniz."
           }
         }
       }

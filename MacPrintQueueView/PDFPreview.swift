@@ -82,3 +82,25 @@ struct PDFPreview: NSViewRepresentable {
         Task { @MainActor [controller] in controller.update() }
     }
 }
+
+/// A page fitted into the available space, without scrolling or controls (the blocks of the
+/// grid shown when several jobs are selected).
+struct FirstPageView: NSViewRepresentable {
+    let document: PDFDocument
+
+    func makeNSView(context: Context) -> PDFView {
+        let view = PDFView()
+        view.displayMode = .singlePage
+        view.displaysPageBreaks = true
+        view.autoScales = true
+        view.backgroundColor = .clear
+        return view
+    }
+
+    func updateNSView(_ view: PDFView, context: Context) {
+        if view.document !== document {
+            view.document = document
+            view.autoScales = true
+        }
+    }
+}

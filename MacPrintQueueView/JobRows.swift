@@ -7,6 +7,8 @@ import SwiftUI
 struct QueueJobRow: View {
     let job: PrintJob
     let thumbnail: NSImage?
+    /// Size of the page thumbnail (the zoom step, D38).
+    var thumbnailSize = ThumbnailZoom.baseSize
     var isSelected = false
     var canPause = false
     var canResume = false
@@ -20,18 +22,22 @@ struct QueueJobRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            PageThumbnail(image: thumbnail)
+            PageThumbnail(image: thumbnail, size: thumbnailSize)
             VStack(alignment: .leading, spacing: 5) {
                 Text(verbatim: job.displayTitle)
                     .fontWeight(.medium)
                     .lineLimit(1)
                     .truncationMode(.middle)
                 HStack(spacing: 6) {
+                    // The label is never cut off; with a large thumbnail in a narrow column the
+                    // time gives way first.
                     StatusBadge(status: job.status, text: job.stateDescription)
+                        .fixedSize()
                     Text(verbatim: job.created.shortTimestamp)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .monospacedDigit()
+                        .lineLimit(1)
                 }
             }
             Spacer(minLength: 0)
@@ -129,11 +135,16 @@ struct RowActionButton: View {
     }
 }
 
-/// Small "sheet of paper" showing the first page of the document.
+/// "Sheet of paper" showing the first page of the document, in the size of the zoom step.
 struct PageThumbnail: View {
     let image: NSImage?
+    var size = ThumbnailZoom.baseSize
 
-    private let shape = RoundedRectangle(cornerRadius: 3, style: .continuous)
+    /// Size relative to the smallest step.
+    private var scale: CGFloat { size.height / ThumbnailZoom.baseSize.height }
+    private var shape: RoundedRectangle {
+        RoundedRectangle(cornerRadius: min(3 * scale, 8), style: .continuous)
+    }
 
     var body: some View {
         ZStack {
@@ -145,11 +156,11 @@ struct PageThumbnail: View {
                     .aspectRatio(contentMode: .fit)
             } else {
                 Image(systemName: "doc.text")
-                    .font(.system(size: 16))
+                    .font(.system(size: 16 * scale))
                     .foregroundStyle(.gray.opacity(0.6))
             }
         }
-        .frame(width: 40, height: 52)
+        .frame(width: size.width, height: size.height)
         .clipShape(shape)
         .overlay(shape.strokeBorder(.black.opacity(0.15), lineWidth: 0.5))
         .shadow(color: .black.opacity(0.18), radius: 1.5, y: 1)

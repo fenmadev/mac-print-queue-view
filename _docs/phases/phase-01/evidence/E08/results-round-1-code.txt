@@ -1,0 +1,9 @@
+PASS one queue row: list highlights 1 job rows, store keeps 1 (queued only)
+PASS select all (⌘A): list highlights 5 job rows, store keeps 5 (queued only)
+  highlighted rows [1, 2, 3, 4, 5, 7, 8, 9, 10]; rows 0–10; header-styled rows [0, 6]
+FAIL select all again (selection unchanged by the rules): list highlights 9 job rows, store keeps 5 (queued only)
+PASS ⇧-range from the first queue row into Completed: list highlights 5 job rows (+ header rows [6], selected programmatically), store keeps 5 (queued only)
+PASS one completed row: list highlights 1 job rows, store keeps 1 (completed only)
+FAIL ⇧-range of completed rows downwards keeps the clicked job (the last row, 1070): 1123 → [1122]
+PASS   list after that range: list highlights 1 job rows, store keeps 1 (completed only)
+FAILURES: 2

@@ -23,6 +23,8 @@ final class QueueStore {
     private(set) var finishedJobs: [PrintJob] = []
     private(set) var connectionError: String?
     private(set) var preview: PreviewState = .none
+    /// Size step of the thumbnails in the queue (D38, D42); not remembered after a restart.
+    var thumbnailStep = ThumbnailZoom.defaultStep
 
     var selectedPrinterName: String? {
         didSet {
@@ -33,11 +35,33 @@ final class QueueStore {
         }
     }
 
-    var selectedJobID: Int32? {
-        didSet {
-            guard selectedJobID != oldValue else { return }
+    /// The selected jobs. Several jobs can only be selected in "In Queue"; a completed job is
+    /// always selected on its own (D39). See `QueueSelection.normalized`.
+    private(set) var selectedJobIDs: Set<Int32> = []
+
+    /// The list selection. Setting it applies the selection rules and loads the preview.
+    var selection: Set<Int32> {
+        get { selectedJobIDs }
+        set {
+            let queued = Set(activeJobs.map(\.id))
+            let normalized = QueueSelection.normalized(newValue, previous: selectedJobIDs, queued: queued)
+            // The list has highlighted rows that the rules dropped: make it redraw with the
+            // selection that applies, also when that selection itself does not change.
+            if normalized != newValue { selectionCorrections += 1 }
+            guard normalized != selectedJobIDs else { return }
+            selectedJobIDs = normalized
             loadPreview()
         }
+    }
+
+    /// Counts the times the list asked for a selection that the rules corrected. The job list reads
+    /// it, so it redraws with the corrected selection (and the table drops the rows it highlighted).
+    private(set) var selectionCorrections = 0
+
+    /// The selected job when exactly one job is selected.
+    var selectedJobID: Int32? {
+        get { selectedJobIDs.count == 1 ? selectedJobIDs.first : nil }
+        set { selection = newValue.map { [$0] } ?? [] }
     }
 
     /// How many finished jobs are shown per printer.
@@ -47,6 +71,16 @@ final class QueueStore {
     var selectedJob: PrintJob? {
         guard let id = selectedJobID else { return nil }
         return activeJobs.first { $0.id == id } ?? finishedJobs.first { $0.id == id }
+    }
+
+    /// The selected jobs that are in the queue, in print order.
+    var selectedQueuedJobs: [PrintJob] {
+        activeJobs.filter { selectedJobIDs.contains($0.id) }
+    }
+
+    /// Is every selected job in the queue (and at least one selected)?
+    var selectionIsQueued: Bool {
+        !selectedJobIDs.isEmpty && selectedJobIDs.allSatisfy { id in activeJobs.contains { $0.id == id } }
     }
 
     func activeJobs(for printer: String) -> [PrintJob] {
@@ -63,6 +97,8 @@ final class QueueStore {
         /// Put a finished job back in the queue (asked from the row buttons and swipe actions,
         /// where a mis-click would otherwise waste paper).
         case reprint(PrintJob)
+        /// Cancel several jobs in the queue at once (one job is canceled without asking, D18).
+        case cancel([PrintJob])
 
         var isDestructive: Bool {
             if case .reprint = self { false } else { true }
@@ -89,6 +125,28 @@ final class QueueStore {
         await run { try CUPSClient.cancelJob(id: id, printer: printer) }
     }
 
+    /// How many of these jobs can be canceled (the user's own jobs in the queue). One is canceled
+    /// right away, several after confirmation.
+    func cancelableCount(_ ids: Set<Int32>) -> Int {
+        queuedOwnJobs(ids).count
+    }
+
+    /// Can at least one of these jobs be canceled?
+    func canCancel(_ ids: Set<Int32>) -> Bool {
+        !queuedOwnJobs(ids).isEmpty
+    }
+
+    /// Cancels one job right away, or asks for confirmation before canceling several (D39).
+    func requestCancel(_ ids: Set<Int32>) {
+        let jobs = queuedOwnJobs(ids)
+        if jobs.count == 1 {
+            let id = jobs[0].id
+            Task { await cancel(jobID: id) }
+        } else if jobs.count > 1 {
+            pendingAction = .cancel(jobs)
+        }
+    }
+
     /// Own completed jobs can be removed from the list (permanently, after confirmation).
     func canRemove(jobID: Int32?) -> Bool {
         guard let jobID, let job = finishedJobs.first(where: { $0.id == jobID }) else { return false }
@@ -100,10 +158,11 @@ final class QueueStore {
         pendingAction = .purge(job)
     }
 
-    /// The ⌫ key: cancel a job in the queue right away, or ask to remove a completed job.
+    /// The ⌫ key: cancel the selected jobs in the queue (one right away, several after
+    /// confirmation), or ask to remove a completed job.
     func deleteSelection() {
-        if canCancel(jobID: selectedJobID) {
-            Task { await cancel(jobID: selectedJobID) }
+        if canCancel(selectedJobIDs) {
+            requestCancel(selectedJobIDs)
         } else {
             requestRemove(jobID: selectedJobID)
         }
@@ -139,6 +198,14 @@ final class QueueStore {
                         : String(localized: "Jobs no longer completed, and therefore not removed: \(outcome.skipped)")
                 case .reprint(let job):
                     try CUPSClient.restartJob(id: job.id)
+                    return nil
+                case .cancel(let jobs):
+                    // Cancel every job, also when one fails; report the first failure.
+                    var failure: Error?
+                    for job in jobs {
+                        do { try CUPSClient.cancelJob(id: job.id, printer: job.printer) } catch { failure = failure ?? error }
+                    }
+                    if let failure { throw failure }
                     return nil
                 }
             }
@@ -187,23 +254,68 @@ final class QueueStore {
         queuedOwnJob(jobID)?.status == .held
     }
 
+    /// Can at least one of these jobs be paused, or resumed?
+    func canPause(_ ids: Set<Int32>) -> Bool { queuedOwnJobs(ids).contains { $0.status == .pending } }
+    func canResume(_ ids: Set<Int32>) -> Bool { queuedOwnJobs(ids).contains { $0.status == .held } }
+
     func pause(jobID: Int32?) async {
-        guard let jobID, canPause(jobID: jobID) else { return }
-        // Check the current state with cupsd first: never pause a job that has just started printing.
-        let current = await Task.detached(priority: .userInitiated) { try? CUPSClient.activeJobs() }.value
-        let status = current?.first(where: { $0.id == jobID })?.status
-        guard status == .pending else {
-            if status == .printing {
-                actionError = String(localized: "This job has already started printing and can no longer be paused. You can cancel it instead.")
-            }
-            return await refresh()
-        }
-        await run { try CUPSClient.holdJob(id: jobID) }
+        guard let jobID else { return }
+        await pause([jobID])
     }
 
     func resume(jobID: Int32?) async {
-        guard let jobID, canResume(jobID: jobID) else { return }
-        await run { try CUPSClient.releaseJob(id: jobID) }
+        guard let jobID else { return }
+        await resume([jobID])
+    }
+
+    /// Pauses every waiting job among `ids`; jobs that are printing are left alone (D17, D39).
+    func pause(_ ids: Set<Int32>) async {
+        let candidates = queuedOwnJobs(ids).filter { $0.status == .pending }.map(\.id)
+        guard !candidates.isEmpty else { return }
+        // Check each job's current state with cupsd right before pausing that job: never pause a
+        // job that has just started printing, also while earlier jobs are being paused. Every job
+        // is handled, also when one fails; the first failure is reported (as for canceling).
+        let outcome = await Task.detached(priority: .userInitiated) {
+            let outcome = BulkPause.run(candidates, check: { id in
+                switch try CUPSClient.jobStatus(id: id) {
+                case .pending?: .waiting
+                case .printing?: .printing
+                default: .other
+                }
+            }, hold: { id in
+                try CUPSClient.holdJob(id: id)
+            })
+            return (started: outcome.started, failure: outcome.failure?.localizedDescription)
+        }.value
+        if outcome.started > 0 {
+            actionError = candidates.count == 1
+                ? String(localized: "This job has already started printing and can no longer be paused. You can cancel it instead.")
+                : String(localized: "Jobs that had already started printing and were not paused: \(outcome.started)")
+        }
+        if let failure = outcome.failure {
+            actionError = failure
+        }
+        await refresh()
+    }
+
+    /// Resumes every paused job among `ids`.
+    func resume(_ ids: Set<Int32>) async {
+        let held = queuedOwnJobs(ids).filter { $0.status == .held }.map(\.id)
+        guard !held.isEmpty else { return }
+        // Release every job, also when one fails; report the first failure (as for pausing).
+        await run {
+            var failure: Error?
+            for id in held {
+                do { try CUPSClient.releaseJob(id: id) } catch { failure = failure ?? error }
+            }
+            if let failure { throw failure }
+        }
+    }
+
+    /// The user's own jobs in the queue among `ids`, in print order.
+    private func queuedOwnJobs(_ ids: Set<Int32>) -> [PrintJob] {
+        let me = CUPSClient.currentUser
+        return activeJobs.filter { ids.contains($0.id) && $0.user == me }
     }
 
     private func queuedOwnJob(_ id: Int32?) -> PrintJob? {
@@ -236,29 +348,39 @@ final class QueueStore {
         job.isWaiting && job.user == CUPSClient.currentUser
     }
 
-    /// Can the job move one place up (`offset` -1) or down (+1)?
-    func canMove(jobID: Int32?, by offset: Int) -> Bool {
-        guard let jobID, let job = activeJobs.first(where: { $0.id == jobID }), canMove(job) else { return false }
-        let waiting = activeJobs(for: job.printer).filter(\.isWaiting)
-        guard let index = waiting.firstIndex(of: job) else { return false }
-        return waiting.indices.contains(index + offset)
+    /// Can the selected jobs (or the jobs of a context menu) move one place up (`offset` -1)
+    /// or down (+1)? See `QueueReorder.gatheredMove`.
+    func canMove(_ ids: Set<Int32>, by offset: Int) -> Bool {
+        reorder(ids, by: offset) != nil
     }
 
-    func move(jobID: Int32?, by offset: Int) async {
-        guard canMove(jobID: jobID, by: offset), let jobID,
-              let job = activeJobs.first(where: { $0.id == jobID }) else { return }
-        var waiting = activeJobs(for: job.printer).filter(\.isWaiting)
-        let index = waiting.firstIndex(of: job)!
-        waiting.swapAt(index, index + offset)
-        await apply(order: waiting, moved: [jobID])
+    /// Moves the waiting jobs among `ids` one place, gathered into one block (D39). Jobs that are
+    /// printing do not move.
+    func move(_ ids: Set<Int32>, by offset: Int) async {
+        guard let change = reorder(ids, by: offset) else { return }
+        await apply(order: change.order, moved: change.moved)
+    }
+
+    /// The new order of the waiting jobs and the IDs of the jobs that move, or nil if nothing moves.
+    private func reorder(_ ids: Set<Int32>, by offset: Int) -> (order: [PrintJob], moved: [Int32])? {
+        let movable = activeJobs.filter { ids.contains($0.id) && canMove($0) }
+        guard let printer = movable.first?.printer else { return nil }
+        let waiting = activeJobs(for: printer).filter(\.isWaiting)
+        let moved = movable.filter { $0.printer == printer }.map(\.id)
+        guard let newOrder = QueueReorder.gatheredMove(waiting.map(\.id), selected: Set(moved), by: offset) else { return nil }
+        let byID = Dictionary(waiting.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        return (newOrder.compactMap { byID[$0] }, moved)
     }
 
     /// Dragging in the list; `jobs` is the list as shown (including jobs that are already printing).
+    /// The dragged jobs that can move are put together at the drop position; jobs that are
+    /// printing stay where they are.
     func move(in jobs: [PrintJob], from source: IndexSet, to destination: Int) async {
-        guard source.allSatisfy({ canMove(jobs[$0]) }) else { return }
+        let movable = IndexSet(source.filter { canMove(jobs[$0]) })
+        guard !movable.isEmpty else { return }
         var reordered = jobs
-        reordered.move(fromOffsets: source, toOffset: destination)
-        await apply(order: reordered.filter(\.isWaiting), moved: source.map { jobs[$0].id })
+        reordered.move(fromOffsets: movable, toOffset: destination)
+        await apply(order: reordered.filter(\.isWaiting), moved: movable.map { jobs[$0].id })
     }
 
     /// Assigns priorities so that cupsd prints the waiting jobs in the given order.
@@ -340,6 +462,7 @@ final class QueueStore {
         switch result {
         case .success(let (printers, active, chosen, finished)):
             connectionError = nil
+            let previouslyQueued = Set(activeJobs.map(\.id))
             if printers != self.printers { self.printers = printers }
             let sortedActive = active.sorted(by: Self.queueOrder)
             if sortedActive != activeJobs { activeJobs = sortedActive }
@@ -347,13 +470,19 @@ final class QueueStore {
             if requested == selectedPrinterName {
                 if chosen != selectedPrinterName { selectedPrinterName = chosen }
                 if finished != finishedJobs { finishedJobs = finished }
-                // Job was removed: clear the selection and preview.
-                if let id = selectedJobID, !activeJobs.contains(where: { $0.id == id }),
-                   !finishedJobs.contains(where: { $0.id == id }) {
-                    selectedJobID = nil
+                // Jobs that left the queue (printed, canceled, aborted) or were removed leave the
+                // selection, so their preview disappears right away (D44).
+                let kept = QueueSelection.keptAfterRefresh(
+                    selectedJobIDs, previouslyQueued: previouslyQueued,
+                    queued: Set(activeJobs.map(\.id)), completed: Set(finishedJobs.map(\.id)))
+                if kept != selectedJobIDs {
+                    selectedJobIDs = kept
+                    loadPreview()
                 }
             }
             updateThumbnails()
+            // The order can bring another selected job into the grid (more than 16 selected).
+            if gridJobs.contains(where: { tiles[$0.id] == nil }) { loadTiles() }
         case .failure(let error):
             connectionError = error.localizedDescription
         }
@@ -388,7 +517,7 @@ final class QueueStore {
         thumbnailTask = Task {
             for id in wanted {
                 let png = await Task.detached(priority: .utility) {
-                    try? PreviewBuilder.makeThumbnailPNG(from: CUPSClient.documents(jobID: id), maxPixelSize: 160)
+                    try? PreviewBuilder.makeThumbnailPNG(from: CUPSClient.documents(jobID: id), maxPixelSize: ThumbnailZoom.renderPixelSize)
                 }.value
                 if let png, let image = NSImage(data: png), activeJobs.contains(where: { $0.id == id }) {
                     thumbnails[id] = image
@@ -402,6 +531,7 @@ final class QueueStore {
 
     private func loadPreview() {
         previewTask?.cancel()
+        loadTiles()
         guard let job = selectedJob else {
             preview = .none
             return
@@ -431,6 +561,97 @@ final class QueueStore {
                 }
             case .failure(let error):
                 preview = .unavailable(error.localizedDescription)
+            }
+        }
+    }
+
+    // MARK: Preview of several jobs
+
+    /// One block of the grid shown when several jobs are selected (D39): only the first page.
+    enum TileState {
+        case loading
+        /// A document containing only the first page; `pageCount` is the number of pages of the
+        /// whole job and `warning` says which part cannot be displayed, if any.
+        case loaded(firstPage: PDFDocument, pageCount: Int, warning: String?)
+        case unavailable(String)
+
+        var isLoading: Bool {
+            if case .loading = self { true } else { false }
+        }
+    }
+
+    /// Blocks of the jobs shown in the grid, by job ID.
+    private(set) var tiles: [Int32: TileState] = [:]
+    private var tileTask: Task<Void, Never>?
+
+    /// The jobs shown in the grid: the first selected jobs in print order (at most
+    /// `PreviewGrid.maximumCount`), or none when fewer than two jobs are selected.
+    var gridJobs: [PrintJob] {
+        let jobs = selectedQueuedJobs
+        return jobs.count > 1 ? Array(jobs.prefix(PreviewGrid.maximumCount)) : []
+    }
+
+    /// Can the block of this job be dragged in the grid? Jobs that are printing cannot move (D40).
+    func canDragInGrid(_ job: PrintJob) -> Bool {
+        canMove(job) && gridJobs.contains { $0.id == job.id }
+    }
+
+    /// Dragging block `jobID` onto block `targetID` in the grid (D40): the dragged job takes the
+    /// target's place among the movable jobs of the grid; these jobs keep the places they occupy
+    /// together in the queue, and all other jobs stay where they are.
+    func moveInGrid(_ jobID: Int32, onto targetID: Int32) async {
+        let grid = gridJobs.filter { canMove($0) }
+        guard let printer = grid.first?.printer,
+              let arranged = QueueReorder.gridMove(grid.map(\.id), moving: jobID, onto: targetID) else { return }
+        let waiting = activeJobs(for: printer).filter(\.isWaiting)
+        guard let newOrder = QueueReorder.rearranged(waiting.map(\.id), as: arranged) else { return }
+        let byID = Dictionary(waiting.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        let moved = zip(grid.map(\.id), arranged).filter { $0 != $1 }.map(\.1)
+        await apply(order: newOrder.compactMap { byID[$0] }, moved: moved)
+    }
+
+    /// Fetches the first page of every job in the grid that does not have a block yet; blocks of
+    /// jobs that are no longer in the grid are dropped.
+    private func loadTiles() {
+        tileTask?.cancel()
+        let jobs = gridJobs
+        let wanted = Set(jobs.map(\.id))
+        if tiles.keys.contains(where: { !wanted.contains($0) }) {
+            tiles = tiles.filter { wanted.contains($0.key) }
+        }
+        let me = CUPSClient.currentUser
+        var missing: [Int32] = []
+        for job in jobs where tiles[job.id]?.isLoading ?? true {
+            if job.user != me {
+                tiles[job.id] = .unavailable(String(localized: "This job belongs to another user. macOS only gives the owner of a job access to its content."))
+            } else {
+                tiles[job.id] = .loading
+                missing.append(job.id)
+            }
+        }
+        guard !missing.isEmpty else { return }
+        tileTask = Task {
+            for id in missing {
+                let result = await Task.detached(priority: .userInitiated) {
+                    Result { try PreviewBuilder.makePreview(from: CUPSClient.documents(jobID: id)) }
+                }.value
+                guard !Task.isCancelled else { return }
+                guard tiles[id] != nil else { continue }
+                switch result {
+                case .success(let result):
+                    if let document = PDFDocument(data: result.pdfData), let page = document.page(at: 0),
+                       let copy = page.copy() as? PDFPage {
+                        let firstPage = PDFDocument()
+                        firstPage.insert(copy, at: 0)
+                        let warning = result.problems.isEmpty ? nil
+                            : ([String(localized: "Part of this job cannot be displayed:")] + result.problems).joined(separator: "\n")
+                        tiles[id] = .loaded(firstPage: firstPage, pageCount: document.pageCount, warning: warning)
+                    } else {
+                        tiles[id] = .unavailable(String(localized: "The document cannot be displayed."))
+                    }
+                case .failure(let error):
+                    tiles[id] = .unavailable(error.localizedDescription)
+                }
             }
         }
     }

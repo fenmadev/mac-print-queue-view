@@ -1,0 +1,43 @@
+== test-printer.sh remove (R1)
+PASS remove: other address, nothing removed: exit 1; sudo []; direct []
+PASS remove: empty address, nothing removed: exit 1; sudo []; direct []
+PASS remove: address cannot be read, nothing removed: exit 1; sudo []; direct []
+PASS remove: address that only starts with the test address, nothing removed: exit 1; sudo []; direct []
+PASS remove: test address, removed: exit 0; sudo [lpadmin -x MPQV_Testprinter]; direct []
+PASS remove: earlier test address, removed: exit 0; sudo [lpadmin -x MPQV_Testprinter]; direct []
+PASS remove: no test printer, nothing done: exit 0; sudo []; direct []
+== test-printer.sh create on an existing test printer (R2)
+PASS accepting: no cupsaccept: exit 0; sudo []; direct []
+PASS not accepting: cupsaccept, then accepting: exit 0; sudo [cupsaccept MPQV_Testprinter]; direct []
+PASS not accepting, cupsaccept has no effect: refused: exit 1; sudo [cupsaccept MPQV_Testprinter]; direct []
+PASS acceptance cannot be read: refused, no cupsaccept: exit 1; sudo []; direct []
+PASS unknown acceptance text: refused, no cupsaccept: exit 1; sudo []; direct []
+PASS other address: refused before anything changes: exit 1; sudo []; direct []
+== negative control: test-printer script of review 07 (R1, R2)
+PASS negative control: earlier version removes a printer with another address: exit 0; sudo [lpadmin -x MPQV_Testprinter]; direct []
+PASS negative control: earlier version takes 'not accepting' for accepting: exit 0; sudo []; direct []
+== install-release.sh process selection (R3)
+PASS dummies running before the install: alive alive alive
+PASS install: exit code: 0
+PASS install: both dummies in the destination quit: gone gone
+PASS install: dummy in the similarly named folder untouched: alive
+PASS install: destination copy replaced: new
+PASS install: similarly named folder unchanged: MacOS
+== install-release.sh when the process list cannot be read (R3)
+PASS install, ps fails: exit code: 1
+PASS install, ps fails: destination not replaced: old
+PASS install, ps fails: dummy in the similarly named folder untouched: alive
+== negative control: install script of review 07 (R3)
+PASS negative control: dummies running before the install: alive alive
+PASS negative control: the earlier version selects the dummy in the similarly named folder: 1
+
+Install script output (first run):
+  Building the Release version… (log: <tmp>/build-tmp/MacPrintQueueView-release/build.log)
+  Quitting the running copy in <tmp>/install [x](y)+.v1/dest.v1…
+  Copying to <tmp>/install [x](y)+.v1/dest.v1/Mac Print Queue View.app…
+  Done: <tmp>/install [x](y)+.v1/dest.v1/Mac Print Queue View.app (version stub, build 0).
+Install script output (ps fails):
+  Building the Release version… (log: <tmp>/build-tmp/MacPrintQueueView-release/build.log)
+  Could not read the list of running programs; nothing was replaced.
+
+ALL PASS

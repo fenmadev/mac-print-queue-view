@@ -1,0 +1,32 @@
+test jobs: 1125 1126 1127 1128
+test jobs A 1125, B 1126, C 1127, D 1128; completed job used for selection 1070
+PASS select A and B: true
+PASS cmd-click completed job: true
+PASS cmd-click queue job onto completed: true
+PASS grid jobs: true
+PASS block MPQV E04 A: pages 1, block pages 1, warning false
+PASS block MPQV E04 B: pages 1, block pages 1, warning false
+PASS preview state with a grid is none: none
+PASS can pause A+B (paused): false
+PASS can resume A+B: true
+PASS can cancel A+B: true
+PASS can drag A in grid: true
+can move A+B up: false, down: true (computed only, not applied)
+PASS empty job C selected alone: true
+PASS C left the queue: selection empty, preview none: true none
+PASS resumed empty job MPQV E04 empty C is no longer held: true
+  state of 1127 after resume: 8
+PASS resumed empty job MPQV E04 empty D is no longer held: true
+  state of 1128 after resume: 8
+PASS ⌫ with two jobs asks for confirmation: true
+PASS MPQV E04 A canceled: true
+PASS MPQV E04 B canceled: true
+PASS selection after canceling both: true
+PASS no error: none
+ALL PASS
+purged 1125
+purged 1126
+purged 1127
+purged 1128
+PASS other jobs: no priority changed (0 jobs present before and after)
+test jobs left in queue or history: 0

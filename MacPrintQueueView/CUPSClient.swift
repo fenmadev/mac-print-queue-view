@@ -12,6 +12,19 @@ struct Printer: Identifiable, Hashable, Sendable {
 /// Simplified job state for the user interface.
 enum JobStatus: Sendable {
     case pending, held, printing, stopped, canceled, aborted, completed, unknown
+
+    init(_ state: ipp_jstate_t) {
+        self = switch state {
+        case IPP_JSTATE_PENDING: .pending
+        case IPP_JSTATE_HELD: .held
+        case IPP_JSTATE_PROCESSING: .printing
+        case IPP_JSTATE_STOPPED: .stopped
+        case IPP_JSTATE_CANCELED: .canceled
+        case IPP_JSTATE_ABORTED: .aborted
+        case IPP_JSTATE_COMPLETED: .completed
+        default: .unknown
+        }
+    }
 }
 
 /// A print job from the existing macOS print queue.
@@ -35,18 +48,7 @@ struct PrintJob: Identifiable, Hashable, Sendable {
         title.isEmpty ? String(localized: "Job \(id)", comment: "Title for a print job without a name") : title
     }
 
-    var status: JobStatus {
-        switch state {
-        case IPP_JSTATE_PENDING: .pending
-        case IPP_JSTATE_HELD: .held
-        case IPP_JSTATE_PROCESSING: .printing
-        case IPP_JSTATE_STOPPED: .stopped
-        case IPP_JSTATE_CANCELED: .canceled
-        case IPP_JSTATE_ABORTED: .aborted
-        case IPP_JSTATE_COMPLETED: .completed
-        default: .unknown
-        }
-    }
+    var status: JobStatus { JobStatus(state) }
 
     var stateDescription: String {
         switch state {
@@ -211,6 +213,11 @@ enum CUPSClient {
             }
             return ipp_jstate_t(rawValue: UInt32(ippGetInteger(attr, 0)))
         }
+    }
+
+    /// The current state of one job, read from cupsd, or nil if the job no longer exists.
+    static func jobStatus(id: Int32) throws -> JobStatus? {
+        try jobState(id: id).map(JobStatus.init)
     }
 
     /// Removes a job permanently, but only if cupsd reports it as finished (completed,

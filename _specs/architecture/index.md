@@ -17,10 +17,11 @@ SwiftUI views ──► QueueStore (@MainActor, @Observable) ──► CUPSClien
 | --- | --- |
 | `CUPSClient.swift` | Thin synchronous layer over libcups: printers, own jobs (`my-jobs`), documents, and the job operations. Defines `Printer`, `PrintJob`, `JobStatus`, `JobDocument`, `CUPSError`. Opens one connection per call. |
 | `PreviewBuilder.swift` | Converts job documents (PDF, images, plain text) into PDF data and first-page thumbnails; reports unsupported formats. |
-| `QueueStore.swift` | App state: printers, queue, completed jobs, selection, preview, thumbnails, pending confirmations and errors; 2-second refresh loop; action logic with re-checks against cupsd. |
-| `ContentView.swift` | Three-column window, job list sections, toolbars, context menus, confirmation dialogs. |
+| `QueueStore.swift` | App state: printers, queue, completed jobs, selection (one or several jobs), preview and the blocks of the grid preview, thumbnails, pending confirmations and errors; 2-second refresh loop; action logic for one or several jobs with re-checks against cupsd. |
+| `QueueLayout.swift` | Pure logic without CUPS or views: thumbnail size steps and job column widths, grid layout for several jobs, selection rules, gathered moves and reordering in the grid. |
+| `ContentView.swift` | Three-column window, job list sections, toolbars, context menus, confirmation dialogs, single preview and the grid preview of several jobs with drag and drop; column support (thick, visible divider through AppKit's split view; job column width following the thumbnail step; widening the window when the columns no longer fit). |
 | `JobRows.swift` | Row views for queued and completed jobs, thumbnail, status badge, section header, row action buttons. |
-| `PDFPreview.swift` | PDFKit wrapper and a controller for paging and zooming. |
+| `PDFPreview.swift` | PDFKit wrapper and a controller for paging and zooming; a fitted single-page view for the grid blocks. |
 | `LanguageSettings.swift`, `SettingsView.swift` | Language choice stored as `AppleLanguages`, Settings window, relaunch. |
 | `MacPrintQueueViewApp.swift` | App entry point, main window, Settings scene, quit after the last window closes. |
 | `Localizable.xcstrings` | String Catalog with English (source), Dutch and Turkish. |

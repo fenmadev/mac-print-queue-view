@@ -1,0 +1,62 @@
+test jobs: 1117 1118 1119 1120 1121 1122 1123 1124
+== E06
+printer with the most queued jobs: 5 queued
+toolbar: 3 items
+select queue row 1
+  selected: queued; toolbar items 13
+select queue row 2
+  selected: queued; toolbar items 13
+select add row 3
+  selected: queued, queued; toolbar items 6
+select completed row
+  selected: completed; toolbar items 11
+select queue row 1 again
+  selected: queued; toolbar items 13
+divider 9.0 points, split view class NSSplitView
+  line across the divider (offset: brightness × alpha): -2:0.16 -1:0.16 0:0.16 1:0.16 2:0.16 3:0.16 4:0.67 5:0.67 6:0.16 7:0.16 8:0.16 9:0.16 10:0.16 11:0.16
+  grip across the divider (offset: brightness × alpha): -2:0.16 -1:0.16 0:0.16 1:0.16 2:0.84 3:0.84 4:0.93 5:0.93 6:0.84 7:0.84 8:0.16 9:0.16 10:0.16 11:0.16
+PASS click on the line goes to NSSplitView (inside the split view: true)
+PASS click on the grip goes to NSSplitView (inside the split view: true)
+survived
+E06 exit 0
+== E08
+PASS one queue row: list highlights 1 job rows, store keeps 1 (queued only)
+PASS select all (⌘A): list highlights 5 job rows, store keeps 5 (queued only)
+PASS select all again (selection unchanged by the rules): list highlights 5 job rows, store keeps 5 (queued only)
+PASS ⇧-range from the first queue row into Completed: list highlights 5 job rows (+ header rows [6], selected programmatically), store keeps 5 (queued only)
+PASS one completed row: list highlights 1 job rows, store keeps 1 (completed only)
+PASS ⇧-range of completed rows downwards keeps the clicked job (the last row, 1070): 1123 → [1070]
+PASS   list after that range: list highlights 1 job rows, store keeps 1 (completed only)
+ALL PASS
+E08 exit 0
+== E08 with the older sources
+PASS one queue row: list highlights 1 job rows, store keeps 1 (queued only)
+PASS select all (⌘A): list highlights 5 job rows, store keeps 5 (queued only)
+  highlighted rows [1, 2, 3, 4, 5, 7, 8, 9, 10]; rows 0–10; header-styled rows [0, 6]
+FAIL select all again (selection unchanged by the rules): list highlights 9 job rows, store keeps 5 (queued only)
+PASS ⇧-range from the first queue row into Completed: list highlights 5 job rows (+ header rows [6], selected programmatically), store keeps 5 (queued only)
+PASS one completed row: list highlights 1 job rows, store keeps 1 (completed only)
+FAIL ⇧-range of completed rows downwards keeps the clicked job (the last row, 1070): 1123 → [1122]
+PASS   list after that range: list highlights 1 job rows, store keeps 1 (completed only)
+FAILURES: 2
+E08 (older sources) exit 1
+== E07
+PASS start: ABCDE
+PASS B D up (D39 example): BDACE
+PASS B D down: ABDCE
+PASS grid shows: BD
+PASS grid: D dragged onto B: ADBCE
+PASS grid after the drag: DB
+PASS list: C and E dragged to the top: CEADB
+PASS no error: none
+ALL PASS
+E07 exit 0
+purged 1117
+purged 1118
+purged 1119
+purged 1120
+purged 1121
+purged 1122
+purged 1123
+purged 1124
+test jobs left in queue or history: 0
